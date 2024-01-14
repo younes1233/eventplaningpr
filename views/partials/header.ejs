@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="/css/Style.css" />
+<header>
+  <div class="container">
+    <a href="/home" class="logo">GlowMelbourneEvents</a>
+
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/gallery">Gallery</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/portfolio">Portfolio</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+      <div class="toggle-btn" onclick="toggleMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Your content goes here -->
+
+<script>
+  function toggleMenu() {
+    const navMenu = document.querySelector(".nav-menu");
+    const toggleBtn = document.querySelector(".toggle-btn");
+
+    navMenu.classList.toggle("active");
+    toggleBtn.classList.toggle("active");
+
+    if (navMenu.classList.contains("active")) {
+      navMenu.classList.remove("closing");
+    } else {
+      navMenu.classList.add("closing");
+      setTimeout(() => {
+        navMenu.classList.remove("closing");
+      }, 500);
+    }
+  }
+</script>

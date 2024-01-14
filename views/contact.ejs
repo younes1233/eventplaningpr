@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Contact Us - Event Planner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/css/intlTelInput.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js"></script>
+
+    <style>
+      :root {
+        --secondary-color: rgb(255, 234, 219);
+        --main-color: rgb(254, 220, 194);
+      }
+      /* Reset styles */
+      body,
+      h1,
+      p,
+      input,
+      textarea,
+      button {
+        margin: 0;
+        padding: 0;
+        font-family: "Montserrat", sans-serif;
+        box-sizing: border-box;
+      }
+
+      /* New specific styles for the contact form */
+      body {
+        height: 100vh;
+        background-color: #f5f5f5;
+      }
+
+      .custom-container {
+        max-width: 600px;
+        width: 90%;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        text-align: center;
+      }
+
+      .custom-h1 {
+        font-family: "Great Vibes", cursive;
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .custom-p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        color: #555;
+      }
+
+      .custom-contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .custom-form-input,
+      .custom-form-textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        color: #333;
+        box-sizing: border-box;
+      }
+
+      .custom-form-textarea {
+        height: 150px;
+        resize: none;
+      }
+
+      .custom-form-submit {
+        padding: 12px;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        color: #fff;
+        background-color: rgb(254, 220, 194);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      #upper-cont {
+        padding: 30px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .custom-form-submit:hover {
+        background-color: #ff7b7b;
+      }
+
+      @media screen and (max-width: 768px) {
+        .custom-container {
+          width: 95%;
+          margin-top: 50px;
+        }
+      }
+      .notification {
+        position: fixed;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 20px;
+        background-color: var(--main-color);
+        color: black;
+        border-radius: 5px;
+        z-index: 1000;
+      }
+    </style>
+  </head>
+  <%- include('partials/header') %>
+  <body>
+    <!-- Notification area for error message -->
+    <% if(errorMessage != " ") { %>
+    <div class="notification" id="error-notification">
+      <h4><%= errorMessage %></h4>
+    </div>
+    <% } %>
+    <div id="upper-cont">
+      <div class="custom-container">
+        <h1 class="custom-h1">Contact Us</h1>
+        <p class="custom-p">
+          Have inquiries? Feel free to get in touch with us!
+        </p>
+
+        <form
+          class="custom-contact-form"
+          action="/api/contacts/contact"
+          method="post"
+        >
+          <input
+            type="text"
+            class="custom-form-input"
+            name="username"
+            placeholder="Your Name"
+            required
+          />
+          <input
+            type="tel"
+            id="phone"
+            class="custom-form-input"
+            name="phone"
+            placeholder="Your Mobile Phone"
+            required
+          />
+          <div id="phone-container"></div>
+
+          <input
+            type="email"
+            class="custom-form-input"
+            name="email"
+            placeholder="Your Email"
+            required
+          />
+          <textarea
+            class="custom-form-textarea"
+            name="message"
+            placeholder="Your Message"
+            required
+          ></textarea>
+          <button type="submit" class="custom-form-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <%- include('partials/footer') %>
+</html>
+<script>
+  //Function to remove the error notification after 5 seconds
+  setTimeout(function () {
+    var errorNotification = document.getElementById("error-notification");
+    if (errorNotification) {
+      errorNotification.style.display = "none";
+    }
+  }, 2500); // 5000 milliseconds = 5 seconds
+  // Initialize intlTelInput without specifying default country
+  var input = document.querySelector("#phone");
+  var iti = window.intlTelInput(input, {
+    separateDialCode: true,
+    utilsScript:
+      "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js",
+  });
+
+  // Manually set the default country to Australia (AU) after initialization
+  iti.setCountry("AU");
+
+  // Add the country flag selector
+  var phoneContainer = document.getElementById("phone-container");
+  phoneContainer.appendChild(iti.flagContainer);
+</script>

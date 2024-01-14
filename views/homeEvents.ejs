@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding Event Planner</title>
+    <link rel="stylesheet" href="/css/Style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <%- include('partials/header') %>
+  <body>
+    <div class="scroll-to-top" id="scrollToTop">&#8593;</div>
+
+    <div class="hero" id="hero">
+      <div class="overlay"></div>
+      <h1>Welcome to Our Wedding Event Planner</h1>
+      <p>Your perfect day, perfectly planned.</p>
+      <a href="/contact" class="btn">Get in Touch</a>
+    </div>
+
+    <main>
+      <section class="about-us">
+        <h2>About Us</h2>
+        <p>
+          We are a team of passionate event planners dedicated to making your
+          special day unforgettable. Our expertise lies in crafting unique and
+          personalized experiences tailored to your preferences.
+        </p>
+        <!-- Add team information, values, etc. -->
+      </section>
+
+      <section class="services">
+        <h2>Our Services</h2>
+        <div class="service-container">
+          <% services.forEach(function(service) { %>
+          <div class="service">
+            <img
+              src="<%= service.ImageURL %>"
+              alt="<%= service.ServiceName %>"
+            />
+            <h3><%= service.ServiceName %></h3>
+            <p><%= service.Description %></p>
+            <p>Price: $<%= service.Price %></p>
+          </div>
+          <% }); %>
+        </div>
+      </section>
+
+      <!-- gallery.ejs -->
+
+      <section class="gallery">
+        <div class="gallery">
+          <% galleries.forEach(item => { %>
+          <div class="gallery-item">
+            <img
+              src="<%= item.Gallery_image %>"
+              alt="<%= item.Gallery_name %>"
+            />
+            <div class="caption"><%= item.Gallery_caption %></div>
+          </div>
+          <% }); %>
+        </div>
+      </section>
+
+      <section class="testimonials">
+        <h2>Testimonials</h2>
+        <div class="testimonial">
+          <p>
+            "The team made our wedding day unforgettable. Highly recommended!"
+          </p>
+          <cite>- John &amp; Sarah</cite>
+        </div>
+        <div class="testimonial">
+          <p>"Professional, organized, and exceeded our expectations!"</p>
+          <cite>- Michael &amp; Emily</cite>
+        </div>
+        <!-- Add more testimonials as needed -->
+      </section>
+
+      <section class="contact">
+        <h2>Contact Us</h2>
+        <a href="/contact" class="btn">Say Hello!</a>
+        <!-- Add a contact form and contact information -->
+        <!-- Include fields for name, email, message, etc. -->
+      </section>
+
+      <!-- Additional sections or elements can be added as necessary -->
+    </main>
+    <%- include('partials/footer') %>
+  </body>
+  <script>
+    // // JavaScript for Scroll-to-Top button
+    // const scrollButton = document.getElementById("scroll-to-top");
+
+    // window.onscroll = function () {
+    //   if (
+    //     document.body.scrollTop > 20 ||
+    //     document.documentElement.scrollTop > 20
+    //   ) {
+    //     scrollButton.style.display = "block";
+    //   } else {
+    //     scrollButton.style.display = "none";
+    //   }
+    // };
+
+    // scrollButton.addEventListener("click", function (e) {
+    //   e.preventDefault();
+    //   document.body.scrollTop = 0;
+    //   document.documentElement.scrollTop = 0;
+    // });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const hero = document.getElementById("hero");
+      const images = [
+        "/images/home.jpeg",
+        "/images/home2.jpeg", // Add additional image paths here
+        "/images/home3.jpeg",
+      ];
+      const preloadedImages = [];
+
+      let currentImageIndex = 0;
+
+      function preloadImages() {
+        for (let i = 0; i < images.length; i++) {
+          const img = new Image();
+          img.src = images[i];
+          preloadedImages.push(img);
+        }
+      }
+
+      function changeBackgroundImage() {
+        hero.style.backgroundImage = `url('${preloadedImages[currentImageIndex].src}')`;
+        currentImageIndex = (currentImageIndex + 1) % preloadedImages.length;
+
+        const overlay = hero.querySelector(".overlay");
+        if (overlay) {
+          overlay.style.opacity = "1";
+          setTimeout(() => {
+            overlay.style.opacity = "0";
+          }, 500);
+        }
+      }
+
+      // Preload images before starting the interval
+      preloadImages();
+
+      setInterval(changeBackgroundImage, 5000); // Change the time interval as needed
+    });
+  </script>
+
+  <script>
+    // JavaScript for scroll-to-top button
+    // const scrollToTopBtn = document.getElementById("scrollToTop");
+
+    // window.addEventListener("scroll", () => {
+    //   if (
+    //     document.body.scrollTop > 20 ||
+    //     document.documentElement.scrollTop > 20
+    //   ) {
+    //     scrollToTopBtn.classList.add("show");
+    //   } else {
+    //     scrollToTopBtn.classList.remove("show");
+    //   }
+    // });
+
+    // scrollToTopBtn.addEventListener("click", () => {
+    //   document.body.scrollTop = 0;
+    //   document.documentElement.scrollTop = 0;
+    // });
+  </script>
+</html>

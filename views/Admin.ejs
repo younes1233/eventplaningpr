@@ -1,0 +1,65 @@
+<!-- contacts.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Contact Information</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="/styles/admin.css" rel="stylesheet">
+</head>
+<body>
+
+
+  <!-- Contact Information Section -->
+  <div class="container mt-4">
+    <h2>Contact Information</h2>
+
+    <div class="table-responsive mt-4">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Contact ID</th>
+            <th>Date Added</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% contacts.forEach(contact => { %>
+            <tr>
+              <td><%= contact.Contact_id %></td>
+              <td><%= new Date(contact.Date_added).toLocaleString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }) %></td>
+              <td><%= contact.Email %></td>
+              <td><%= contact.Name %></td>
+              <td><%= contact.Phone %></td>
+              <td><%= contact.Message %></td>
+              <td>
+                <form action="/update-contact/<%= contact.Contact_id %>" method="POST">
+                  <select name="status" onchange="this.form.submit()">
+                    <option value="processed" <%= contact.ColumnStatus === 'processed' ? 'selected' : '' %>>Processed</option>
+                    <option value="deleted" <%= contact.ColumnStatus === 'deleted' ? 'selected' : '' %>>Deleted</option>
+                  </select>
+                </form>
+              </td>
+              <td>
+                <!-- Add any other action buttons if needed -->
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <!-- Bootstrap JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

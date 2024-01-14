@@ -1,0 +1,10 @@
+<%- include('partials/header') %>
+<div class="container">
+  <h1>Delete Item</h1>
+  <form id="deleteForm" action="/api/userd/<%= itemID %>" method="POST">
+    <!-- Hidden input field to hold the item ID -->
+    <input type="hidden" id="itemId" name="itemId" value="<%= itemID %>" />
+    <!-- Submit button styled with Bootstrap -->
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+</div>

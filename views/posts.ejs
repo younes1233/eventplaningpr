@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <title>Social Media Homepage</title>
+    <style>
+      .card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        transition: transform 0.3s ease-in-out;
+        max-width: 400px;
+        width: 100%;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+      }
+
+      .card-body {
+        padding: 15px;
+      }
+
+      .card-img {
+        max-width: 100%;
+        border-radius: 10px;
+      }
+
+      .card-footer {
+        border-top: 1px solid #eee;
+        padding: 10px 15px;
+      }
+
+      .comment {
+        margin-bottom: 20px;
+        padding: 8px;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+      }
+
+      .comment-header {
+        font-weight: bold;
+        margin-bottom: 3px;
+      }
+
+      .comment-time {
+        color: #888;
+        font-size: 0.9em;
+      }
+
+      .comment-content p {
+        margin-bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!--  header content -->
+    <%- include('partials/header') %>
+
+    <section class="container mt-5">
+      <div class="row justify-content-center">
+        <% posts.forEach(post => { %>
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text"><%= post.content %></p>
+              <img
+                src="<%= post.post_pic_url %>"
+                alt="Post Image"
+                class="card-img"
+              />
+            </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-md-6">
+                  <button type="button" class="btn btn-outline-primary">
+                    Like
+                  </button>
+                  <span>15 Likes</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <span>8 Comments</span>
+                </div>
+              </div>
+              <div class="comments mt-3"></div>
+              <form
+                id="commentForm"
+                action="/api/comments/comment"
+                method="POST"
+              >
+                <div class="form-group">
+                  <textarea
+                    id="commentContent"
+                    class="form-control"
+                    rows="2"
+                    placeholder="Add a comment"
+                    name="content"
+                  ></textarea>
+                  <input
+                    type="text"
+                    name="user_id"
+                    class="form-control hidden"
+                    placeholder="user_id"
+                    value=""
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="post_id"
+                    class="form-control hidden"
+                    placeholder="user_id"
+                    value="<%= post.post_id %>"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Post Comment
+                </button>
+              </form>
+              <div
+                id="notification"
+                class="alert alert-success"
+                style="display: none"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </section>
+
+    <!-- footer content -->
+    <%- include('partials/footer') %>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRjFuxa+eGE3zo3lXssFo+4c5ECxQrOV8tF6KaC2m"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

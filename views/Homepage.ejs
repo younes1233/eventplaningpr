@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- jQuery and Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+  crossorigin="anonymous"
+></link>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRjFuxa+eGE3zo3lXssFo+4c5ECxQrOV8tF6KaC2m" crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <title>Social Media Homepage</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+    <style>
+    
+   
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+      }
+      .hidden {
+        display: none;
+      }
+      .user-profile {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .post {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .post-content {
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .post-image {
+        width: 100%;
+        border-radius: 8px 8px 0 0;
+      }
+
+      .post-actions {
+        padding: 10px 20px;
+        border-top: 1px solid #eee;
+      }
+
+      .comment {
+        padding: 8px 20px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .comment:last-child {
+        border-bottom: none;
+      }
+
+      .form-group {
+        margin-bottom: 0;
+      }
+
+      textarea {
+        resize: none;
+      }
+      .header {
+        text-align: center;
+        padding: 50px 0;
+        background: linear-gradient(45deg, #ff8a00, #e52e71);
+        color: white;
+        margin-bottom: 30px;
+      }
+
+      .comment {
+        margin-bottom: 20px;
+        /* Style each comment box */
+      }
+
+      .comment-header {
+        font-weight: bold;
+        /* Style the comment header (user and time) */
+      }
+
+      .comment-time {
+        color: #888;
+        font-size: 0.9em;
+        /* Style the time of the comment */
+      }
+
+      .comment-content {
+        /* Style the comment content */
+      }
+      /* Styles for "What are you thinking about?" section and post creation */
+.thoughts-section {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.editable-content {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.editable-content:focus {
+  border-color: #495057;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.post-creation .card {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.post-creation .card p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+}
+/* CSS styles for the profile section */
+
+.user-profile {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.profile-picture {
+  width: 150px; 
+  height: 150px; 
+  object-fit: cover;
+}
+
+.profile-details h2,
+.profile-details h3,
+.profile-details p {
+  margin-bottom: 5px;
+}
+
+.email {
+  color: #888;
+  font-size: 14px;
+}
+
+.bio {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.thoughts-section {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.editable-content {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.editable-content:focus {
+  border-color: #495057;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+
+    </style>
+  </head>
+  <%- include('partials/header') %>
+
+  <body>
+   
+
+    <div class="container mt-4">
+      <!-- Header Section -->
+      <header class="mb-4">
+        <h2>Discover the Social World</h2>
+     
+      </header>
+      <section class="user-profile">
+        <div class="row align-items-center">
+          <div class="col-md-3 text-center">
+            <img src="<%= user.profile_pic_url %>" alt="Profile Picture" class="img-fluid rounded-circle profile-picture">
+          </div>
+          <div class="col-md-9">
+            <div class="profile-details">
+              <h2><%= user.username %></h2>
+              <h3><%= user.last_name %></h3>
+              <p class="email"><%= user.email %></p>
+              <p class="bio"><%= user.bio %></p>
+      
+             <form>
+              <div class="thoughts-section mt-4">
+                <input id="userThoughts" class="editable-content" contenteditable="true" placeholder="Share your thoughts..."></input>
+                <input type="text" id="imageUrl" class="mt-2" placeholder="Enter image URL...">
+              </div>
+              <button onclick="createPost()" class="btn btn-primary mt-2">Post</button>
+             </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Post Section -->
+      <section class="post">
+        <% posts.forEach(post => { %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="post-content">
+              <p><%= post.content %></p>
+              <img
+                src="<%= post.post_pic_url %>"
+                alt="Post Image"
+                class="post-image"
+              />
+            </div>
+            <div class="post-actions">
+              <div class="row">
+                <div class="col-md-6">
+                  <button type="button" class="btn btn-outline-primary">
+                    Like
+                  </button>
+                  <span>15 Likes</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <span>8 Comments</span>
+                </div>
+              </div>
+              <!-- Comments Section -->
+              <div class="comments">
+         
+              
+              </div>
+          
+              <form
+                id="commentForm"
+                action="/api/comments/comment"
+                method="POST"
+              >
+                <div class="form-group">
+                  <textarea
+                    id="commentContent"
+                    class="form-control"
+                    rows="2"
+                    placeholder="Add a comment"
+                    name="content"
+                  ></textarea>
+                  <div class="hidden">
+                    <input
+                      type="text"
+                      name="user_id"
+                      class="form-control"
+                      placeholder="user_id"
+                      value="<%= user.user_id %>"
+                      required
+                    />
+                  </div>
+                  <div class="hidden">
+                    <input
+                      type="text"
+                      name="post_id"
+                      class="form-control"
+                      placeholder="user_id"
+                      value="<%= post.post_id %>"
+                      required
+                    />
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Post Comment
+                </button>
+              </form>
+              <div
+                id="notification"
+                class="alert alert-success"
+                style="display: none"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </section>
+    
+    </div>
+    
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      // Function to format time (JavaScript)
+      function formatTime(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+          hour12: true,
+        });
+      }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+  $('#commentForm').submit(function(event) {
+    event.preventDefault();
+    var formData = $(this).serialize();
+
+    $.ajax({
+      type: 'POST',
+      url: $(this).attr('action'),
+      data: formData,
+      success: function(response) {
+        // Show success notification
+        $('#notification').text('Comment posted successfully').fadeIn().delay(2000).fadeOut();
+        
+        // Clear textarea content
+        $('#commentContent').val('');
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
+        // Handle error if needed
+      }
+    });
+  });
+});
+
+    </script>
+  
+  </body>
+  <%- include('partials/footer') %>
+</html>

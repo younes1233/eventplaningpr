@@ -22,20 +22,19 @@ const reviews = require("./routes/Reviews.routes");
 const services = require("./routes/Services.routes");
 const contacts = require("./routes/Contact.routes");
 
-app.get("/", async (req, res) => {
-  const users = await query("select * from users");
-  const data = {
-    message: "test message",
-    content: "this is the content",
-    users: users,
-  };
-  res.render("index", data);
-});
+// app.get("/", async (req, res) => {
+//   const users = await query("select * from users");
+//   const data = {
+//     message: "test message",
+//     content: "this is the content",
+//     users: users,
+//   };
+//   res.render("index", data);
+// });
 
-app.get("/home", async (req, res) => {
+app.get("/", async (req, res) => {
   const services = await query("select * from Services");
   const galleries = await query("select * from Gallery");
-  console.log(galleries);
   res.render("homeEvents", { services: services, galleries: galleries });
 });
 
@@ -55,7 +54,6 @@ app.get("/admin", async (req, res) => {
 
 app.get("/gallery", async (req, res) => {
   const galleries = await query("SELECT * FROM Gallery LIMIT 6");
-  console.log(galleries);
   res.render("Gallery", { galleries: galleries });
 });
 

@@ -1,7 +1,7 @@
 const mysql = require("mysql2/promise");
 const config = require("./config");
 
-var connection;
+let connection;
 
 const connect = async () => {
   try {
@@ -16,10 +16,11 @@ const connect = async () => {
 };
 
 const query = async (sql, params) => {
-  if (!connection) {
-    await connect();
-  }
   try {
+    if (!connection || connection.state === "disconnected") {
+      await connect();
+    }
+
     const [results] = await connection.execute(sql, params);
     return results;
   } catch (error) {

@@ -18,7 +18,8 @@ h4,
 h5,
 a,
 p {
-  font-family: "Great Vibes", cursive;
+  /* font-family: "Great Vibes", cursive; */
+  font-family: "Biryani", sans-serif;
   font-weight: 700;
 }
 

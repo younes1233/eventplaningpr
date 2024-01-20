@@ -31,12 +31,28 @@ const contacts = require("./routes/Contact.routes");
 //   };
 //   res.render("index", data);
 // });
-
 app.get("/", async (req, res) => {
-  const services = await query("select * from Services");
-  const galleries = await query("select * from Gallery");
-  res.render("homeEvents", { services: services, galleries: galleries });
+  try {
+    // Check if the connection is closed and reconnect if necessary
+    if (!connection || connection.state === "disconnected") {
+      await connect();
+    }
+
+    const services = await query("select * from Services");
+    const galleries = await query("select * from Gallery");
+
+    res.render("homeEvents", { services: services, galleries: galleries });
+  } catch (error) {
+    console.error("Error handling route:", error.message);
+    res.status(500).send("Internal Server Error");
+  }
 });
+
+// app.get("/", async (req, res) => {
+//   const services = await query("select * from Services");
+//   const galleries = await query("select * from Gallery");
+//   res.render("homeEvents", { services: services, galleries: galleries });
+// });
 
 app.get("/login", async (req, res) => {
   res.render("login", { errorMessage: " " });

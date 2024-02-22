@@ -1,10 +1,10 @@
 const { check } = require("express-validator");
 
 const insertContactValidation = [
-  check("username").notEmpty().withMessage("User Name is required"),
-  check("email").isEmail().withMessage("Invalid Email Format"),
-  check("message").notEmpty().withMessage("Invalid message Format"),
-  check("phone").isMobilePhone().withMessage("invalid mobile phone"),
+  // check("username").notEmpty().withMessage("User Name is required"),
+  // check("email").isEmail().withMessage("Invalid Email Format"),
+  // check("message").notEmpty().withMessage("Invalid message Format"),
+  // check("phone").isMobilePhone().withMessage("invalid mobile phone"),
 ];
 
 const updateUserValidation = [

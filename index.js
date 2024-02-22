@@ -61,7 +61,12 @@ app.get("/login", async (req, res) => {
 app.get("/about", async (req, res) => {
   res.render("about");
 });
-
+app.get("/terms", async (req, res) => {
+  res.render("Terms");
+});
+app.get("/privacy", async (req, res) => {
+  res.render("Privacy");
+});
 app.get("/admin", async (req, res) => {
   const contacts = await query("SELECT * FROM Contact");
   console.log(contacts);

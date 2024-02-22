@@ -374,11 +374,14 @@ header {
 @media (max-width: 768px) {
   .nav-menu {
     opacity: 0;
+    display: none;
   }
 }
 
 .nav-menu.closing {
   animation: slideOut 0.3s ease-in-out forwards; /* Apply disappearance animation */
+  opacity: 0;
+  display: none;
 }
 
 /* footer styles */

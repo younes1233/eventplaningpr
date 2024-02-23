@@ -1,12 +1,12 @@
 require("dotenv").config();
 const config = {
   db: {
-    host: process.env.DB_HOST || "72.167.211.165",
-    user: process.env.DB_USER || "younes_social",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
     port: 3306,
-    password: process.env.DB_PASS || "younes1231",
-    database: process.env.DB_NAME || "EventPlanningDB",
-    connectionLimit: 10,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    connectionLimit: 100,
     JWT_SECRET: "L#kdh2i12#1",
   },
 };
